@@ -245,21 +245,24 @@
                 <h2 class="text-center mb-4">Contact Info</h2>
                 <ul class="list-group list-group-flush lead">
                     <li class="list-group-item">
-                        <span class="fw-bold">Location</span> 410 E Columbus Dr  Lake County, IN
+                        <span class="fw-bold">Location</span> Dragon, Utah
                     </li>
                     <li class="list-group-item">
-                        <span class="fw-bold">Teacher Phone</span> (555) 555-5555
+                        <span class="fw-bold">Teacher Phone</span> (385) 867-5309
                     </li>
                     <li class="list-group-item">
-                        <span class="fw-bold">Student Phone</span> (333) 333-3333
+                        <span class="fw-bold">Student Phone</span> (385) 789-1245
                     </li>
                     <li class="list-group-item">
-                        <span class="fw-bold">Teacher Email</span> teacher@dragons.com
+                        <span class="fw-bold">Teacher Email</span> teacher@dragons.edu
                     </li>
                     <li class="list-group-item">
-                        <span class="fw-bold">Student Email</span> student@dragons.com
+                        <span class="fw-bold">Student Email</span> student@dragons.edu
                     </li>
                 </ul>
+            </div>
+            <div class="col-md">
+                <div id="map"></div>
             </div>
         </div>
     </div>
@@ -322,7 +325,17 @@
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 
+<Script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY3NjaG9sbDE2IiwiYSI6ImNsbTA1b3A3aTA4Z2MzZXBpY3U0enp4ZW8ifQ.oI3dLts6jMNAtcInznnP-A';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [39.785833, -109.073333],
+    zoom: 18,
+  });
+</Script>
 
 
 </body>
