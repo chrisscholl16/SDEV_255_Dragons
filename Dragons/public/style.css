@@ -49,6 +49,9 @@ h3{
     margin-bottom: 8px;
     color: white;
 }
+.accordian-body{
+    color: black;
+}
 .content{
     margin-left: 20px;
 }

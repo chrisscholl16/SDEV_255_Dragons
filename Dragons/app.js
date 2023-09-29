@@ -72,8 +72,14 @@ app.get ('/' , (req, res) => {
 });                                       
 
 //Courses Pages
-app.get ('/courses' , (req, res) => {  
-   res.render('courses' , { title : 'Courses'}); 
+app.get ('/courses' , (req, res) => { 
+   Course.find().sort({ createdAt: -1 })
+      .then((result) => {
+         res.render('courses', { title: 'All Courses', courses: result })
+      })
+      .catch((err) => {
+         console.log(err);
+      }); 
 });
 
 app.post('/course', (req, res) => {
