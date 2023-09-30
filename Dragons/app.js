@@ -73,7 +73,7 @@ app.get ('/' , (req, res) => {
 
 //Courses Pages
 app.get ('/courses' , (req, res) => { 
-   Course.find().sort({ createdAt: -1 })
+   Course.find(id).sort({ createdAt: -1 })
       .then((result) => {
          res.render('courses', { title: 'All Courses', courses: result })
       })
@@ -87,11 +87,16 @@ app.post('/course', (req, res) => {
 
    course.save()
       .then((result) => {
-         res.redirect('/courses.ejs');
+         res.redirect('/coursesIndex');
       })
       .catch((err) => {
          console.log(err);
       })
+})
+
+app.get('/course/:id',  (req, res) => {
+   const id = req.params.id;
+   console.log(id);
 })
 
 app.get ('/courseDetails' , (req, res) => {  

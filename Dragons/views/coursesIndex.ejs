@@ -8,16 +8,17 @@
     <h2>All Courses</h2>
     <% if (course.length > 0) { %>
       <% courses.forEach(course => { %>
-    
-        <h3 class="name"><%= course.title %></h3>
-        <p class="desc"><%= course.desc %></p>
-        <p class="subArea"><%= course.subArea %></p>
-        <p class="numcred"><%= course.numcred %></p>
+        <a class="single" href="/course/<% course._id %>">
+          <h3 class="name"><%= course.title %></h3>
+          <p class="desc"><%= course.desc %></p>
+          <p class="subArea"><%= course.subArea %></p>
+          <p class="numcred"><%= course.numcred %></p>
+        </a>
       <% }) %>
     <% } else { %>
       <p>There are no courses to display...</p>
       <% } %>
-      
+
   </div>
 
 
