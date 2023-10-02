@@ -57,14 +57,22 @@ h3{
 }
 /* index styles */
 .courses a{
-    display: block;
-    margin: 40px 0;
-    padding-left: 30px;
-    border-left: 6px solid crimson;
+    color: rgb(12, 12, 12);
+        display: block;
+        margin: 40px 0;
+        padding-left: 30px;
+        border-left: 6px solid crimson;
+    
 }
+
+.courses a h3{
+    color:rgb(10, 10, 10); 
+}
+
 .courses a:hover h3{
     color: crimson;
 }
+
 /* details styles */
 .details{
     position: relative;

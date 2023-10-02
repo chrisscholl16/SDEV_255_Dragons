@@ -22,7 +22,7 @@
 
                         <section>
                             <div class = "create-course content">
-                              <form action="/coursesIndex" method="POST">
+                              <form action="/course" method="post">
                                   <label for = "name">Course Name:</label>
                                   <input type = "text" id = "name" name = "name" required>
                                   <label for = "desc">Course Description:</label>
@@ -32,10 +32,13 @@
                                   <label for = "numcred">Number of Credits</label>
                                   <input type = "text" id = "numcred" name = "numcred" required>
                                  
-                                  <a href="/courses" class="btn btn-danger btn-lg">
-                                    <i class="bi bi-chevron-right"></i> Add Course</a>
-                          <a href="/coursesIndex" class="btn btn-success btn-lg">
-                            <i class="bi bi-chevron-right"></i> Check All Courses</a>
+                                 
+                                    <button class="btn btn-success btn-lg bi bi-chevron-right">Add Course</button>
+                                    <button class="btn btn-success btn-lg bi bi-chevron-right" onclick="window.location.href = '/coursesIndex';">Check All Courses</button>
+
+                                    
+                                    
+                          
                         </form>
                         </div>
                         </section>
