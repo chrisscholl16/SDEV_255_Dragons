@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const { render } = require('ejs');
-const mongodb = require('mongodb')
 const mongoose = require('mongoose');
 const Course = require('./models/course')
 
@@ -13,12 +12,6 @@ const dbURI = 'mongodb+srv://dragons:Passw0rd@mongodb.ho5iekl.mongodb.net/mongod
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
    .then((result) => app.listen(3000))//listening for request and starting the server
    .catch((err) => console.log(err));
-   //const MyModel = mongoose.model(Course, new Schema({
-      //name: 'Math',
-      //desc: 'Adding, subtracting, multiplying and dividing',
-      //subArea: 'Numbers',
-      //numcred: '3'
-   //}))
 
 //register view engine
 app.set ('view engine', 'ejs'); //set lets us set some settings it looks into views folder for ejs files
@@ -36,7 +29,7 @@ app.use((req, res, next) => {
 //mongoose and mongo sandbox routes
 //app.get('/add-course', (req, res) => {
    //const course = new Course({
-     //name: 'Math',
+      //name: 'Math',
       //desc: 'Adding, subtracting, multiplying and dividing',
       //subArea: 'Numbers',
       //numcred: '3'
@@ -76,22 +69,28 @@ app.use((req, res, next) => {
 //Home page
 app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
-});                                       
+});        
+
+app.get ('/addCourse' , (req, res) => {
+   res.render('addCourse' , { title : 'Add Course'}); 
+});   
+
+  
 
 //Courses Pages
-app.get ('/courses' , (req, res) => { 
-   Course.find(id).sort({ createdAt: -1 })
+app.get ('/coursesIndex' , (req, res) => { 
+   Course.find().sort({ createdAt: -1 })
       .then((result) => {
-         res.render('courses', { title: 'All Courses', courses: result })
+         res.render('coursesIndex', { title: 'All Courses', courses: result })//geting all courses details and send result to course Index page
       })
       .catch((err) => {
          console.log(err);
       }); 
 });
 
+// Adding 1 course to DB
 app.post('/course', (req, res) => {
    const course = new Course(req.body);
-
    course.save()
       .then((result) => {
          res.redirect('/coursesIndex');
@@ -99,20 +98,40 @@ app.post('/course', (req, res) => {
       .catch((err) => {
          console.log(err);
       })
-})
+});
 
-app.get('/course/:id',  (req, res) => {
+//Getting one course details and send it to Course Details page
+app.get('/courses/:id',  (req, res) => {
+   const id = req.params.id;   
+   Course.findById(id)
+    .then(result => {
+      res.render('courseDetails', { course: result, title: 'Course Details' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+//Deleting one course
+app.delete('/courses/:id', (req, res) => {
    const id = req.params.id;
-   console.log(id);
-})
-
-app.get ('/courseDetails' , (req, res) => {  
-    res.render('courseDetails' , { title : 'Course Details'}); 
+   
+   Course.findByIdAndDelete(id)
+     .then(result => {
+       res.json({ redirect: '/coursesIndex' });
+     })
+     .catch(err => {
+       console.log(err);
+     });
  });
 
- app.get ('/coursesIndex' , (req, res) => {  
-   res.render('coursesIndex' , { title : 'Courses Index'}); 
-});
+
+
+
+
+
+
+ 
 
 //teachers page
 app.get ('/teachers' , (req, res) => {  

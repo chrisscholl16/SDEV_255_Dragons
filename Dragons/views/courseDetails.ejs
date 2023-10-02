@@ -12,11 +12,10 @@
         <h2>Requisted Course</h2>       
 
           
-            <h4 class="name">Course Name: <%= course.name %></h4> 
-             
-            <p class="courseDesc">Course Description: <%= course.desc %></p>        
-            <p class="subArea">Subject Area: <%= course.subArea %></p>
-            <p class="numcred">Credit Hours: <%= course.numcred %></p>
+            <h3 class="name"><%= course.name %></h3>  
+            <p class="courseDesc"><%= course.desc %></p>        
+            <p class="subArea"><%= course.subArea %></p>
+            <p class="numcred"><%= course.numcred %></p>
            
          
           <button class="btn btn-success btn-lg bi bi-chevron-right delete" id="delete"   data-doc="<%= course._id %>">Delete</button>
@@ -30,7 +29,7 @@
 
     <script>
         const trashcan = document.querySelector('#delete');
-
+            
         trashcan.addEventListener('click', (e) => {
           const endpoint = `/courses/${trashcan.dataset.doc}`; <!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
     

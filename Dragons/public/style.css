@@ -56,7 +56,7 @@ h3{
     margin-left: 20px;
 }
 /* index styles */
-.coursesIndex a{
+.courses a{
     color: rgb(12, 12, 12);
         display: block;
         margin: 40px 0;
@@ -65,11 +65,11 @@ h3{
     
 }
 
-.coursesIndex a h3{
+.courses a h3{
     color:rgb(10, 10, 10); 
 }
 
-.coursesIndex a:hover h3{
+.courses a:hover h3{
     color: crimson;
 }
 
