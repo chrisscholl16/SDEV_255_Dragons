@@ -10,8 +10,8 @@
       <% courses.forEach(course => { %>
         <a class="single" href="/courses/<%= course._id %>">
           <h3 class="name"><%= course.name %></h3>          
-          <p class="subArea"><%= course.subArea %></p>
-          <p class="numcred"><%= course.numcred %></p>
+          <p class="subArea">Subject Area: <%= course.subArea %></p>
+          <p class="numcred">Credits: <%= course.numcred %></p>
          
         </a>
       <% }) %>
