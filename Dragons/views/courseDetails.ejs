@@ -7,19 +7,19 @@
 
     <!--Course Details-->
     <section class="p-5 bg-success">
-        <div class="container p-5 bg-white">
+        <div class="details container p-5 bg-white">
          
-        <h2>Requisted Course</h2>       
-
+        <h2>Requisted Course</h2>      
           
             <h3 class="name"><%= course.name %></h3>  
             <p class="courseDesc">Description: <%= course.desc %></p>        
             <p class="subArea">Subject Area: <%= course.subArea %></p>
-            <p class="numcred">Credits: <%= course.numcred %></p>
+            <p class="numcred">Credits: <%= course.numcred %></p>           
            
          
-          <button class="btn btn-success btn-lg bi bi-chevron-right delete" id="delete"   data-doc="<%= course._id %>">Delete</button>
-       <!-- <a class="delete" data-doc="<%= course._id %>">delete</a>-->
+          <button class="btn btn-danger btn-lg bi bi-chevron-right delete p-1"    data-doc="<%= course._id %>">Delete</button>
+          <p></p>
+      <!-- <a class="delete" id="delete" data-doc="<%= course._id %>">delete</a>-->
       </div>
       </section>
     
@@ -28,7 +28,7 @@
     <%- include("./partials/footer.ejs") %>
 
     <script>
-        const trashcan = document.querySelector('#delete');
+        const trashcan = document.querySelector('.delete');
             
         trashcan.addEventListener('click', (e) => {
           const endpoint = `/courses/${trashcan.dataset.doc}`; <!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
