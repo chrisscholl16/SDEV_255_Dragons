@@ -26,12 +26,13 @@
 
     <!-- Footer -->
     <%- include("./partials/footer.ejs") %>
-
+       <!--js code to for delete button-->
     <script>
+     
         const trashcan = document.querySelector('.delete');
             
         trashcan.addEventListener('click', (e) => {
-          const endpoint = `/courses/${trashcan.dataset.doc}`; <!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
+          const endpoint = `/courses/${trashcan.dataset.doc}`; //<!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
     
           fetch(endpoint, {
             method: 'DELETE',

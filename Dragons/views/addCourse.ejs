@@ -12,7 +12,7 @@
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
                     <h1><span class="text-warning">
-                        Modify Courses Below!!
+                        Add Courses Below!!
                     </span></h1>
                     
                     
@@ -22,7 +22,7 @@
 
                         <section>
                             <div class = "create-course content">
-                              <form action="/course" method="post">
+                              <form action="/courses/add" method="post">
                                   <label for = "name">Course Name:</label>
                                   <input type = "text" id = "name" name = "name" required>
                                   <label for = "desc">Course Description:</label>
@@ -34,7 +34,7 @@
                                  
                                  
                                     <button class="btn btn-success btn-lg bi bi-chevron-right">Add Course</button>
-                                    <button class="btn btn-success btn-lg bi bi-chevron-right" onclick="window.location.href = '/coursesIndex';">Check All Courses</button>
+                                    <button class="btn btn-success btn-lg bi bi-chevron-right" onclick="window.location.href = '/courses/Index';">Check All Courses</button>
 
                                     
                                     
@@ -45,7 +45,7 @@
                       </div>
 
                 </div>
-                <img class="img-fluid w-50  d-none d-sm-block" src="img/dragonCourse.jpg" alt="">
+                <img class="img-fluid w-50  d-none d-sm-block" src="../img/dragonCourse.jpg" alt="">
             </div>
         </div>
     </section>

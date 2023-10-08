@@ -71,14 +71,14 @@ app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
 });        
 
-app.get ('/addCourse' , (req, res) => {
+app.get ('/courses/add' , (req, res) => {
    res.render('addCourse' , { title : 'Add Course'}); 
 });   
 
   
 
 //Courses Pages
-app.get ('/coursesIndex' , (req, res) => { 
+app.get ('/courses/Index' , (req, res) => { 
    Course.find().sort({ createdAt: -1 })
       .then((result) => {
          res.render('coursesIndex', { title: 'All Courses', courses: result })//geting all courses details and send result to course Index page
@@ -89,11 +89,11 @@ app.get ('/coursesIndex' , (req, res) => {
 });
 
 // Adding 1 course to DB
-app.post('/course', (req, res) => {
+app.post('/courses/add', (req, res) => {
    const course = new Course(req.body);
    course.save()
       .then((result) => {
-         res.redirect('/coursesIndex');
+         res.redirect('/courses/Index');
       })
       .catch((err) => {
          console.log(err);
@@ -118,7 +118,7 @@ app.delete('/courses/:id', (req, res) => {
    
    Course.findByIdAndDelete(id)
      .then(result => {
-       res.json({ redirect: '/coursesIndex' });
+       res.json({ redirect: '/courses/Index' });
      })
      .catch(err => {
        console.log(err);
