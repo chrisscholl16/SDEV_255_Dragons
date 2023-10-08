@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const { render } = require('ejs');
 const mongoose = require('mongoose');
-const Course = require('./models/course')
+
+const coursesRoutes = require('./routes/coursesRoutes');
 
 //Express app
 const app = express();
@@ -71,66 +72,8 @@ app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
 });        
 
-app.get ('/courses/add' , (req, res) => {
-   res.render('addCourse' , { title : 'Add Course'}); 
-});   
-
-  
-
-//Courses Pages
-app.get ('/courses/Index' , (req, res) => { 
-   Course.find().sort({ createdAt: -1 })
-      .then((result) => {
-         res.render('coursesIndex', { title: 'All Courses', courses: result })//geting all courses details and send result to course Index page
-      })
-      .catch((err) => {
-         console.log(err);
-      }); 
-});
-
-// Adding 1 course to DB
-app.post('/courses/add', (req, res) => {
-   const course = new Course(req.body);
-   course.save()
-      .then((result) => {
-         res.redirect('/courses/Index');
-      })
-      .catch((err) => {
-         console.log(err);
-      })
-});
-
-//Getting one course details and send it to Course Details page
-app.get('/courses/:id',  (req, res) => {
-   const id = req.params.id;   
-   Course.findById(id)
-    .then(result => {
-      res.render('courseDetails', { course: result, title: 'Course Details' });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-//Deleting one course
-app.delete('/courses/:id', (req, res) => {
-   const id = req.params.id;
-   
-   Course.findByIdAndDelete(id)
-     .then(result => {
-       res.json({ redirect: '/courses/Index' });
-     })
-     .catch(err => {
-       console.log(err);
-     });
- });
-
-
-
-
-
-
-
+//all courses routes
+app.use('/courses',coursesRoutes);
  
 
 //teachers page
