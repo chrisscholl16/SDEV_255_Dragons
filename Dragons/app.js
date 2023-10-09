@@ -2,8 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const { render } = require('ejs');
 const mongoose = require('mongoose');
-
+const cookieParser = require('cookie-parser');
+const authRoutes = require ('./routes/authRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
+
+
+const { requireAuth, checkTeacher } = require('./middleware/authMiddleware');
+
 
 //Express app
 const app = express();
@@ -26,46 +31,17 @@ app.use((req, res, next) => {
     res.locals.path = req.path;
     next();
   });
-  
-//mongoose and mongo sandbox routes
-//app.get('/add-course', (req, res) => {
-   //const course = new Course({
-      //name: 'Math',
-      //desc: 'Adding, subtracting, multiplying and dividing',
-      //subArea: 'Numbers',
-      //numcred: '3'
-   //});
+app.use(express.json());
+app.use(cookieParser());
 
-   //course.save()
-      //.then((result) => {
-         //res.send(result)
-      //})
-      //.catch((err) => {
-         //console.log(err);
-      //});
-//});
+app.use(authRoutes);
 
-//app.get('/all-courses', (req, res) => {
-   //Course.find()
-      //.then((result) => {
-         //res.send(result);
-      //})
-      //.catch((err) => {
-         //console.log(err);
-      //});
-//});
 
-//app.get('/single-course', (req, res) => {
-   //Course.findById('65172157106402157c38d1a0')
-      //.then((result) => {
-        //res.send(result)
-      //})
-      //.catch((err) => {
-        //console.log(err);
-      //});
-//});
+
+
 
 //Routes
+app.get('*', checkTeacher);// call check user for every get request
 
 //Home page
 app.get ('/' , (req, res) => {
