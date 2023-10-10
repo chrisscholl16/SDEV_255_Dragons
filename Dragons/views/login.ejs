@@ -6,20 +6,22 @@
         <%- include("./partials/nav.ejs") %>
 
     <!--Showcase or main header area-->
-    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
-        <div class="container">
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start" >
+        <div class="container " align="center" >
+          <div class="col-5">
 
 
-<form action="/signup">
+<form action="/signup" >
   <h2>Login</h2>
   <label for="email" class="col-form-label">Email</label>
-  <input type="text" name="email" class="form-control" />
+  <input type="text" name="email" class="form-control " />
   <div class="email error"></div>
   <label for="password" class="col-form-label">Password</label>
   <input type="password" name="password" class="form-control" />
   <div class="password error"></div>
-  <button class="btn btn-success btn-lg">login</button>
+  <button class="btn btn-success btn-lg mt-3 ">login</button>
 </form>
+</div>
 
 <!-- Footer -->
 <%- include("./partials/footer.ejs") %>
