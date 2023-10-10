@@ -2,7 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const { render } = require('ejs');
 const mongoose = require('mongoose');
+
 const cookieParser = require('cookie-parser');
+
 const authRoutes = require ('./routes/authRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
 
@@ -34,7 +36,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(authRoutes);
+
 
 
 
@@ -43,6 +45,8 @@ app.use(authRoutes);
 //Routes
 app.get('*', checkTeacher);// call check user for every get request
 
+
+app.use(authRoutes); // that should be here after the checkTeacher is called 
 //Home page
 app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
@@ -61,6 +65,8 @@ app.get ('/teachers' , (req, res) => {
 app.get ('/students' , (req, res) => {  
     res.render('students' , { title : 'Students'}); 
  });
+
+ app.use(authRoutes); // that should be here after the checkTeacher is called 
 
 
  // 404 page
