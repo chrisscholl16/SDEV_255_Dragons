@@ -12,14 +12,18 @@
             <ul class="navbar-nav ms-auto">
                 
                 <!--ADD IF TEACHER EJS <!--show log out only if he is loged in -->
-                <li class="nav-item"><a href="/courses/add" class="nav-link">Courses</a></li>
-                <li class="nav-item"><a href="/courses/coursesIndex" class="nav-link">Courses Index</a></li>    
-                <li class="nav-item"><a href="/students" class="nav-link">Students</a></li>
-                <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>  
 
+                <% if (teacher) { %>
+                    <li>Welcome, <%= teacher.email %></li>
+                    <li class="nav-item"><a href="/courses/add" class="nav-link">Courses</a></li>
+                    <li class="nav-item"><a href="/courses/coursesIndex" class="nav-link">Courses Index</a></li>                
+                    <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
+                <% } else { %>
                 <!--ADD ELSE-->
-                <li class="nav-item"><a href="/teacherSignup" class="nav-link">Teacher Sign up</a></li>
-                <li class="nav-item"><a href="/login" class="nav-link">Teacher Log in</a></li>
+                    <li class="nav-item"><a href="/teacherSignup" class="nav-link">Teacher Sign up</a></li>
+                    <li class="nav-item"><a href="/login" class="nav-link">Teacher Log in</a></li>
+                    <li class="nav-item"><a href="/students" class="nav-link">Students</a></li>
+                <% } %>
             <!--    ADD BRACKET  -->
             </ul>
         </div>
