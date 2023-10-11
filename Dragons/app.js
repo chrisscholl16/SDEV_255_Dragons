@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.get('*', checkTeacher);// call check user for every get request
 
 
-app.use(authRoutes); // that should be here after the checkTeacher is called 
+
 //Home page
 app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 

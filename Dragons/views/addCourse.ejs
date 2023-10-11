@@ -31,7 +31,9 @@
                                   <input type = "text" id = "subArea" name = "subArea" required>
                                   <label for = "numcred">Number of Credits</label>
                                   <input type = "text" id = "numcred" name = "numcred" required>
-                                 
+                                  <!--hidden input to have the teacher id who created the course-->
+                                  <input type = "text" id = "createdBy" name = "createdBy" style="display:none;" value="<%= teacher._id%>"> 
+                                  
                                  
                                     <button class="btn btn-success btn-lg bi bi-chevron-right">Add Course</button>
                                     <button class="btn btn-success btn-lg bi bi-chevron-right" onclick="window.location.href = '/courses/coursesIndex';">Check All Courses</button>

@@ -14,10 +14,13 @@
             <h3 class="name"><%= course.name %></h3>  
             <p class="courseDesc">Description: <%= course.desc %></p>        
             <p class="subArea">Subject Area: <%= course.subArea %></p>
-            <p class="numcred">Credits: <%= course.numcred %></p>           
-           
-         
+            <p class="numcred">Credits: <%= course.numcred %></p> 
+
+
+            <!--only display delete button if the logged in teacher is the one created the course-->
+            <% if (course.createdBy.equals(teacher._id)) { %>
           <button class="btn btn-danger btn-lg bi bi-chevron-right delete p-1"    data-doc="<%= course._id %>">Delete</button>
+          <% } %>
           <p></p>
       <!-- <a class="delete" id="delete" data-doc="<%= course._id %>">delete</a>-->
       </div>
