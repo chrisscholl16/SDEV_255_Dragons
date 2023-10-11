@@ -1,5 +1,7 @@
 const Teacher = require("../models/Teacher");
+const Student = require("../models/Student");
 const jwt = require('jsonwebtoken');
+const sjwt = require('jsonwebtoken'); // sjwt, student token
 
 // handle errors
 const handleErrors = (err) => {
@@ -37,27 +39,35 @@ const handleErrors = (err) => {
 
 // create json web token
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (id) => {
+const createTeacherToken = (id) => {
   return jwt.sign({ id }, 'dragons secret', {
     expiresIn: maxAge
   });
 };
 
+const createStudentToken = (id) => {
+  return sjwt.sign({ id }, 'dragons secret', {
+    expiresIn: maxAge
+  });
+};
+
 // controller actions
-module.exports.signup_get = (req, res) => {
-  res.render('teacherSignup', { title : 'Teacacher Sign up'});
+
+//Teacher controlllers
+module.exports.teacher_signup_get = (req, res) => {
+  res.render('teacherSignup', { title : 'Teacher Sign up'});
 }
 
-module.exports.login_get = (req, res) => {
-  res.render('login', { title : 'log in'});
+module.exports.teacher_login_get = (req, res) => {
+  res.render('teacherLogin', { title : 'log in'});
 }
 
-module.exports.signup_post = async (req, res) => {
-  const { name, phone, email, password } = req.body;
+module.exports.teacher_signup_post = async (req, res) => {
+  const { name, email, password } = req.body;
 
   try {
-    const teacher = await Teacher.create({ name, phone, email, password });
-    const token = createToken(teacher._id);
+    const teacher = await Teacher.create({ name, email, password });
+    const token = createTeacherToken(teacher._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ teacher: teacher._id });
   }
@@ -69,12 +79,12 @@ module.exports.signup_post = async (req, res) => {
 }
 
 
-module.exports.login_post = async (req, res) => {
+module.exports.teacher_login_post = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const teacher = await Teacher.login(email, password);
-    const token = createToken(teacher._id);
+    const token = createTeacherToken(teacher._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ teacher: teacher._id });
   } 
@@ -85,7 +95,53 @@ module.exports.login_post = async (req, res) => {
 
 }
 
+//Student controllers
+module.exports.student_signup_get = (req, res) => {
+  res.render('studentSignup', { title : 'Student Sign up'});
+}
+
+module.exports.student_login_get = (req, res) => {
+  res.render('studentLogin', { title : 'log in'});
+}
+
+module.exports.student_signup_post = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    const student = await Student.create({ name, email, password });
+    const token = createStudentToken(student._id);
+    res.cookie('sjwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(201).json({ student: student._id });
+  }
+  catch(err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
+ 
+}
+
+
+module.exports.student_login_post = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const student = await Student.login(email, password);
+    const token = createStudentToken(student._id);
+    res.cookie('sjwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json({ student: student._id });
+  } 
+  catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
+
+}
+
+
+
+//Log out controller for all users
 module.exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
+  res.cookie('sjwt', '', { maxAge: 1 });
   res.redirect('/');
 }

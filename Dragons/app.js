@@ -9,7 +9,7 @@ const authRoutes = require ('./routes/authRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
 
 
-const { requireAuth, checkTeacher } = require('./middleware/authMiddleware');
+const { requireAuth, checkTeacher, checkStudent } = require('./middleware/authMiddleware');
 
 
 //Express app
@@ -44,6 +44,7 @@ app.use(cookieParser());
 
 //Routes
 app.get('*', checkTeacher);// call check user for every get request
+app.get('*', checkStudent);// call check user for every get request
 
 
 
@@ -52,19 +53,14 @@ app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
 });        
 
+app.get ('/studentSchedule' , (req, res) => {
+  res.render('studentSchedule' , { title : 'Schedule'}); 
+}); 
 //all courses routes
 app.use('/courses',coursesRoutes);
  
 
-//teachers page
-app.get ('/teachers' , (req, res) => {  
-    res.render('teachers' , { title : 'Teachers'}); 
- });
 
-//students page
-app.get ('/students' , (req, res) => {  
-    res.render('students' , { title : 'Students'}); 
- });
 
  app.use(authRoutes); // that should be here after the checkTeacher is called 
 

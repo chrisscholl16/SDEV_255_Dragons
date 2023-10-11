@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
+const sjwt = require('jsonwebtoken');
 const Teacher = require('../models/Teacher');
+const Student = require('../models/Student');
 
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -19,6 +21,8 @@ const requireAuth = (req, res, next) => {
     res.redirect('/login');
   }
 };
+
+
 
 // check current teacher
 const checkTeacher = (req, res, next) => {
@@ -41,4 +45,25 @@ const checkTeacher = (req, res, next) => {
     }
   };
 
-module.exports = { requireAuth, checkTeacher  };
+  // check current student
+const checkStudent = (req, res, next) => {
+  const token = req.cookies.sjwt;
+  if (token) {
+    sjwt.verify(token, 'dragons secret', async (err, decodedToken) => {
+      if (err) {
+        res.locals.student = null;
+        next();
+      } else {
+        let student = await Student.findById(decodedToken.id);
+        res.locals.student = student;// here we made the student object saved and available in locals for every view
+        console.log(res.locals.student);
+        next();
+      }
+    });
+  } else {
+    res.locals.student = null;
+    next();
+  }
+};
+
+module.exports = { requireAuth, checkTeacher, checkStudent };

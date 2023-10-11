@@ -21,10 +21,10 @@
                         latest and greatest technologies to prepare them to be the best Dragon they can be.
                     </p>
                     
-<!--Form to add teachers-->
+<!--Form to add students-->
                     <div class="modal-body">
-                        <p class="lead">Fill out this form and we will get back to you</p>
-                        <form action="/teacherSignup">
+                        <p class="lead">Fill out this form to add a student to the system.</p>
+                        <form action="/studentSignup">
                           <div class="mb-3">
                               <label for="first-last name" class="col-form-label">
                                   First-Last Name:
@@ -45,12 +45,12 @@
                               <input type="text" class="form-control" name="password" id="password" required>
                               <div class="password error"></div>
                           </div>
-                          <button class="btn btn-success btn-lg bi bi-chevron-right">Sign up Teacher</button>
+                          <button class="btn btn-success btn-lg bi bi-chevron-right">Add Student</button>
                         </form>
                       </div>
 
                 </div>
-                <img class="img-fluid w-50  d-none d-sm-block" src="img/dragonTeacher.jpg" alt="">
+                <img class="img-fluid w-50  d-none d-sm-block" src="img/dragonStudent.jpg" alt="">
             </div>
         </div>
     </section>
@@ -93,7 +93,7 @@
   
       //console.log(email, password);
       try {
-        const res = await fetch('/teacherSignup', { 
+        const res = await fetch('/studentSignup', { 
           method: 'POST', 
           body: JSON.stringify({ name, email, password }),
           headers: {'Content-Type': 'application/json'}
@@ -104,8 +104,8 @@
           emailError.textContent = data.errors.email;
           passwordError.textContent = data.errors.password;
         }
-        if (data.teacher) {
-          location.assign('/');
+        if (data.student) {
+          location.assign('/studentSignup');
         }    
       }
       catch (err) {
