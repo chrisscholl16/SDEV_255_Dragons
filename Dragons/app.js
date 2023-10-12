@@ -65,9 +65,6 @@ app.use('/courses',coursesRoutes);
 //all students routes
 app.use('/students',studentsRoutes);
 
-app.get ('/studentSchedule' , (req, res) => {
-  res.render('studentSchedule' , { title : 'Schedule'}); 
-}); 
 
 app.use(authRoutes); // that should be here after the checkTeacher is called 
 

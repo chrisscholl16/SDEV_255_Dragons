@@ -2,12 +2,10 @@ const Student = require('../models/Student');
 
 
 
-
- const course_addToSchedule_post = (req, res) => {
-   console.log(req.body);
-   console.log(req.body.courseId);
+// conrtoller to add course to student schedule
+ const course_addToSchedule_post = (req, res) => {  
+  
    const course = req.body
-
    
   Student.updateOne(
       { _id: course.studentId },
@@ -26,8 +24,26 @@ const Student = require('../models/Student');
        })
  };
 
+ //controller to show students schedule
+ const  student_showShedule_get = (req, res) => {  
+
+   const id = req.params.id;   
+   Student.findById(id)
+    .then(result => {
+      res.render('./studentSchedule', { studentDetails: result, title: 'Student Schedule Details' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+
+
+
+
 module.exports={
 
-    
-        course_addToSchedule_post
+        
+        course_addToSchedule_post,
+        student_showShedule_get
 }

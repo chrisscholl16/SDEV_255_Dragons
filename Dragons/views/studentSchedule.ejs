@@ -12,15 +12,23 @@
             <div class="courses content p-5" >
 
                 <h2>Student schedule</h2>
-                <a class="single" href="#">
+                <h2 class="name"><%=studentDetails.name %>'s Schedule</h2> 
+                <% if (studentDetails.schedule.length > 0) { %> 
+                <% studentDetails.schedule.forEach(course => { %>
 
-               
-                <h3 class="name">course.name %></h3>          
-                <p class="subArea">Subject Area: course.subArea %></p>
-                <p class="numcred">Credits: course.numcred %></p>
-                </a>
-                
+                    <a class="single" href="/courses/<%= course._id %>">
+
+                        <h3 class="name"><%= course.courseName %></h3>          
+                        <p class="subArea">Subject Area: <%= course.courseDescription %></p>
+                        <p class="numcred">Credits: <%= course.courseCredit %></p>
+                       
+                      </a>
+                      <% }) %>
               </div>
+              
+              <% } else { %>
+                <p>There are no courses to display...</p>
+                <% } %>
 
 
 
