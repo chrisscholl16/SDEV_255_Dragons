@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require ('./routes/authRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
+const studentsRoutes = require('./routes/studentsRoutes');
 
 
 const { requireAuth, checkTeacher, checkStudent } = require('./middleware/authMiddleware');
@@ -45,6 +46,8 @@ app.use(cookieParser());
 //Routes
 app.get('*', checkTeacher);// call check user for every get request
 app.get('*', checkStudent);// call check user for every get request
+app.post('*', checkTeacher);// call check user for every get request
+app.post('*', checkStudent);// call check user for every get request
 
 
 
@@ -53,16 +56,20 @@ app.get ('/' , (req, res) => {
     res.render('index' , { title : 'Home'}); 
 });        
 
+
+
+
+//all courses routes
+app.use('/courses',coursesRoutes);
+
+//all students routes
+app.use('/students',studentsRoutes);
+
 app.get ('/studentSchedule' , (req, res) => {
   res.render('studentSchedule' , { title : 'Schedule'}); 
 }); 
-//all courses routes
-app.use('/courses',coursesRoutes);
- 
 
-
-
- app.use(authRoutes); // that should be here after the checkTeacher is called 
+app.use(authRoutes); // that should be here after the checkTeacher is called 
 
 
  // 404 page

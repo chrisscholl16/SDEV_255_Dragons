@@ -56,7 +56,7 @@ const checkStudent = (req, res, next) => {
       } else {
         let student = await Student.findById(decodedToken.id);
         res.locals.student = student;// here we made the student object saved and available in locals for every view
-        console.log(res.locals.student);
+       // console.log(res.locals.student);
         next();
       }
     });

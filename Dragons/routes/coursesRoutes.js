@@ -21,6 +21,7 @@ const router = express.Router();
  
  //Deleting one course
  router.delete('/:id', coursesController.course_delete);
+
  
 
   module.exports = router;

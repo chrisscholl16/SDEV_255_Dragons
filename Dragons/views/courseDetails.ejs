@@ -10,19 +10,35 @@
         <div class="details container p-5 bg-white">
          
         <h2>Requisted Course</h2>      
-          
-            <h3 class="name"><%= course.name %></h3>  
-            <p class="courseDesc">Description: <%= course.desc %></p>        
-            <p class="subArea">Subject Area: <%= course.subArea %></p>
-            <p class="numcred">Credits: <%= course.numcred %></p> 
+          <form  action="/students/addToSchedule " method="post">
+            <h3 class="name" name="name"><%= course.name %></h3>              
+            <p class="courseDesc" name="description">Description: <%= course.desc %></p>        
+            <p class="subArea" name="subArea">Subject Area: <%= course.subArea %></p>
+            <p class="numcred" name="credits">Credits: <%= course.numcred %></p> 
+           
+            <!--hidden input to have the course information -->
+            <input type = "text" id = "courseId" name="courseId" style="display:none;" value="<%= course._id%>"> 
+            <input type = "text" id = "name" name="name" style="display:none;" value="<%= course.name%>"> 
+            <input type = "text" id = "description" name = "description" style="display:none;" value="<%= course.desc%>"> 
+            <input type = "text" id = "subArea" name = "subArea" style="display:none;" value="<%= course.subArea%>"> 
+            <input type = "text" id = "credits" name = "credits" style="display:none;" value="<%= course.numcred%>"> 
+            <% if(student){ %>
+              <!--hidden input to have the teacher id who created the course-->
+              <input type = "text" id = "studentId" name = "studentId" style="display:none;" value="<%= student._id%>"> 
+
+              <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right addToSchedule p-1"     %>">Add course to schedule</button>
+              <% } %>
 
 
             <!--only display delete button if the logged in teacher is the one created the course-->
             <% if(teacher){if (course.createdBy.equals(teacher._id)) { %>
           <button class="btn btn-danger btn-lg bi bi-chevron-right delete p-1"    data-doc="<%= course._id %>">Delete</button>
           <% } }%>
+
+          
           <p></p>
-      <!-- <a class="delete" id="delete" data-doc="<%= course._id %>">delete</a>-->
+        </form>
+      
       </div>
       </section>
     
@@ -44,6 +60,19 @@
           .then((data) => window.location.href = data.redirect)
           .catch(err => console.log(err));
         });
+
+        /*const courseToSchedule = document.querySelector('.addToSchedule');
+            
+        courseToSchedule.addEventListener('click', (e) => {
+          const endpoint = `/courses/addToSchedule`; //<!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
+    
+          fetch(endpoint, {
+            method: 'POST',
+          })
+          .then((response) => response.json())
+          .then((data) => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+        });*/
         
     </script>
 
