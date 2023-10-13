@@ -3,6 +3,11 @@ const studentsController = require('../controllers/studentsControllers')
 
 const router = express.Router();  
 
+//getting all courses list to populate course search drop down menu
+router.get ('/studentSearchCourses' , studentsController.courses_index );
+ 
+
+
 //Getting Course Details
 router.get('/studentCourseDetails/:id', studentsController.student_courseDetails_get);
 

@@ -1,6 +1,19 @@
 const Student = require('../models/Student');
 const Course = require('../models/course');
 
+// getting all courses to coursesIndex page
+const courses_index =(req, res) => { 
+  console.log('inside controller');
+  Course.find().sort({ name: 1 })
+     .then((result) => {
+        res.render('studentSearchCourses', { title: 'Search Courses', courses: result })//geting all courses details and send result to course Index page
+     })
+     .catch((err) => {
+        console.log(err);
+     }); 
+};
+
+
 //Getting course details
 
 const student_courseDetails_get = (req, res) => {
@@ -71,7 +84,7 @@ const course_in_schedule_delete = (req, res) => {
 
 
 module.exports={
-
+        courses_index,
          student_courseDetails_get,
         course_addToSchedule_post,
         student_showShedule_get,

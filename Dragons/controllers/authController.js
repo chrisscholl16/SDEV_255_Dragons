@@ -67,9 +67,9 @@ module.exports.teacher_signup_post = async (req, res) => {
 
   try {
     const teacher = await Teacher.create({ name, email, password });
-    const token = createTeacherToken(teacher._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ teacher: teacher._id });
+   // const token = createTeacherToken(teacher._id);
+    //res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    //res.status(201).json({ teacher: teacher._id });
   }
   catch(err) {
     const errors = handleErrors(err);
