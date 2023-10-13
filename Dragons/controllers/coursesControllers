@@ -50,6 +50,7 @@ const courses_index =(req, res) => {
 
  //Deleting one course
  const course_delete = (req, res) => {
+   console.log(req.params);
     const id = req.params.id;
     
     Course.findByIdAndDelete(id)
