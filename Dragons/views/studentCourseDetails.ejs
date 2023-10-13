@@ -9,31 +9,37 @@
     <section class="p-5 bg-success">
         <div class="details container p-5 bg-white">
          
-        <h2>Requisted Course</h2>                     
-            
-        <form action="/courses/updateCourseGet/<%= course._id%>">   
+        <h2>Requisted Course</h2> 
           
+          <form  action="/students/addToSchedule " method="post">
+           
+            
             <h3 class="name" name="name"><%= course.name %></h3>              
             <p class="courseDesc" name="description">Description: <%= course.desc %></p>        
             <p class="subArea" name="subArea">Subject Area: <%= course.subArea %></p>
             <p class="numcred" name="credits">Credits: <%= course.numcred %></p> 
            
-            <!--only display delete button if the logged in teacher is the one created the course-->
-            <% if(teacher){if (course.createdBy.equals(teacher._id)) { %>
-          <button class="btn btn-danger btn-lg bi bi-chevron-right delete p-1"    data-doc="<%= course._id %>">Delete</button>
-          <br><br>
-          <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right update p-1" >Update</button>
-          
-          <% } }%>
+            <!--hidden input to have the course information -->
+            <input type = "text" id = "courseId" name="courseId" style="display:none;" value="<%= course._id%>"> 
+            <input type = "text" id = "name" name="name" style="display:none;" value="<%= course.name%>"> 
+            <input type = "text" id = "description" name = "description" style="display:none;" value="<%= course.desc%>"> 
+            <input type = "text" id = "subArea" name = "subArea" style="display:none;" value="<%= course.subArea%>"> 
+            <input type = "text" id = "credits" name = "credits" style="display:none;" value="<%= course.numcred%>"> 
+           
+              <!--hidden input to have the teacher id who created the course-->
+              <input type = "text" id = "studentId" name = "studentId" style="display:none;" value="<%= student._id%>"> 
 
-        </form>
+              <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right addToSchedule p-1" %>">Add course to schedule</button>
+             
+
+
+           
+          
           <p></p>
-        
+        </form>
       
       </div>
       </section>
-
-      
     
 
     <!-- Footer -->

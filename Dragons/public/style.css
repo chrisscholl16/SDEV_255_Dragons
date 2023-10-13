@@ -99,6 +99,7 @@ h3{
 }
 .create-course input,
 .create-course textarea{
+     
     display: block;
     width: 100%;
     margin: 10px 0;

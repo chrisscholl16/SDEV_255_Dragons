@@ -8,7 +8,13 @@
     <h2>All Courses</h2>
     <% if (courses.length > 0) { %>
       <% courses.forEach(course => { %>
+      <%if (teacher) {%>
         <a class="single" href="/courses/<%= course._id %>">
+          <% } else { %>
+            <a class="single" href="/students/studentCourseDetails/<%= course._id %>">
+            <% } %>
+
+         
           <h3 class="name"><%= course.name %></h3>          
           <p class="subArea">Subject Area: <%= course.subArea %></p>
           <p class="numcred">Credits: <%= course.numcred %></p>

@@ -1,12 +1,26 @@
 const Student = require('../models/Student');
+const Course = require('../models/course');
+
+//Getting course details
+
+const student_courseDetails_get = (req, res) => {
+  const id = req.params.id;   
+  Course.findById(id)
+   .then(result => {
+     res.render('studentCourseDetails', { course: result, title: 'Student Course Details' });
+   })
+   .catch(err => {
+     console.log(err);
+   });
+};
+
 
 
 
 // conrtoller to add course to student schedule
  const course_addToSchedule_post = (req, res) => {  
-  
-   const course = req.body
-   
+  const id = req.params.id;     
+   const course = req.body   
   Student.updateOne(
       { _id: course.studentId },
       { $push: {schedule:
@@ -58,7 +72,7 @@ const course_in_schedule_delete = (req, res) => {
 
 module.exports={
 
-        
+         student_courseDetails_get,
         course_addToSchedule_post,
         student_showShedule_get,
         course_in_schedule_delete

@@ -18,6 +18,13 @@ const router = express.Router();
 
  //Getting one course details and send it to Course Details page
  router.get('/:id',  coursesController.course_details);
+
+ //Updating course details
+ //Getting the page of updating course inputs
+ router.get('/updateCourseGet/:id', coursesController.course_update_getpage);
+
+ //Sending the updates to DB
+ router.post('/updateCourse/:id', coursesController.course_update_post);
  
  //Deleting one course
  router.delete('/:id', coursesController.course_delete);

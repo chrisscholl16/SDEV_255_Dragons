@@ -38,7 +38,9 @@ const courses_index =(req, res) => {
 
  //Getting one course details
  const course_details = (req, res) => {
-    const id = req.params.id;   
+   
+    const id = req.params.id;  
+    
     Course.findById(id)
      .then(result => {
        res.render('courseDetails', { course: result, title: 'Course Details' });
@@ -47,6 +49,46 @@ const courses_index =(req, res) => {
        console.log(err);
      });
  };
+
+// Getting updating course page
+ const course_update_getpage =  (req, res) => {
+   const id = req.params.id;  
+      Course.findById(id)
+     .then(result => {  
+       res.render('updateCourse', { course: result, title: 'Update Course' });
+       console.log(result);
+     })
+     .catch(err => {
+       console.log(err);
+     });
+ };
+
+ 
+   
+
+ //Updating a course  
+ const course_update_post = (req, res) => {   
+   const id = req.params.id;    
+   const course = req.body; 
+   console.log(course)  
+  Course.updateOne(
+      { _id: id },
+     {$set: { name: course.name, 
+             desc: course.desc, 
+             subArea: course.subArea, 
+             numcred: course.numcred }})
+             .then((result) => {
+             res.redirect('/courses/coursesIndex');
+        
+       })
+       .catch((err) => {
+          console.log(err);
+       })
+ };
+
+
+
+ 
 
  //Deleting one course
  const course_delete = (req, res) => {
@@ -63,20 +105,8 @@ const courses_index =(req, res) => {
   };
 
 
- const course_addToSchedule_post = (req, res) => {
-   console.log(req.body);
-   res.redirect('./coursesIndex');
-  /* students.updateOne(
-      { _id: student.id },
-      { $push: { scores: 89 } }
-   )
-       .then((result) => {
-          res.redirect('./coursesIndex');
-       })
-       .catch((err) => {
-          console.log(err);
-       })*/
- };
+
+ 
 
 module.exports={
 
@@ -84,6 +114,7 @@ module.exports={
      course_details,
       course_create_get,
        course_create_post,
-        course_delete,
-        course_addToSchedule_post
+        course_delete,       
+         course_update_getpage,
+          course_update_post
 }
